@@ -1,12 +1,11 @@
 function MyController($scope) {
-  $scope.clock=  {
-    new Date();
-  }
   var updateClock = function(){
-    $scope.clock.now = new Date();
+    $scope.clock = new Date();
   }
   setInterval(function() {
       $scope.$apply(updateClock);
-      },1000);
+  }, 1000);
   updateClock();
+
+  $scope.name = "Edvinas";
 };
