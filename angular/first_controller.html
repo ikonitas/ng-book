@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title>Simple app</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+  </head>
+  <body>
+
+    <div ng-controller="FirstController">
+      <h4>The simplest adding machine ever</h4>
+      <button ng-click="add(1)"class="button">Add</button>
+      <a ng-click="subtract(1)"class="button alert">Subtract</a>
+      <h4>Current count: {{ counter }}</h4>
+    </div>
+
+    <div ng-controller="MyController">
+      <h1>{{ person }}</h1>
+      and their name:
+      <h2>{{ person.name }}</h2>
+    </div>
+
+    <div ng-controller="ParentController">
+      <div ng-controller="ChildController">
+        <a ng-click="sayHello()">Say Hello</a>
+      </div>
+      {{ person }}
+    </div>
+
+      <script>
+        var app = angular.module('app', []);
+
+        app.controller('FirstController', function($scope){
+          $scope.counter = 0;
+          $scope.add=function(amount) { $scope.counter+=amount; };
+          $scope.subtract=function(amount) { $scope.counter-=amount; };
+        });
+
+        app.controller('MyController', function($scope){
+          $scope.person = {
+            name: 'Edvinas Jurevicius'
+          };
+        });
+
+        app.controller('ParentController', function($scope){
+            $scope.person = { greeted: false};
+        });
+
+        app.controller('ChildController', function($scope){
+            $scope.sayHello = function(){
+              $scope.person.name = "Ari Lerner";
+              $scope.person.greeted = true;
+            }
+        });
+
+      </script>
+  </body>
+</html>
