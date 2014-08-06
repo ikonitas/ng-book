@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <title>Directives</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+  </head>
+  <body>
+      <my-directive></my-directive>
+      <my-directive1></my-directive1>
+      <br>
+
+      <input type="text" ng-model="myUrl" />
+      <div my-directivesuper some-attr="{{ myUrl }}" my-link-text="Click me to go to google">
+      </div>
+
+      <h2>New Directive</h2>
+      <input type="text" ng-model="theirUrl" />
+      <div new-directive some-attr="theirUrl" my-link-text="Click me to go to google">
+      </div>
+
+      <h2 ng-init="greeting = 'Hello World'">
+        The greeting is: {{ greeting }}
+      </h2>
+
+      <script>
+        var app = angular.module('myApp', []);
+        app.directive('myDirective', function(){
+          return {
+            restrict: 'E',
+            template: '<a href="http://google.com">Click me to go to Google</a>',
+          }
+        });
+        app.directive('myDirective1', function(){
+          return {
+            restrict: 'EAC',
+            replace: true,
+            template: '<a href="http://google.com">Click me to go to Google</a>',
+          }
+        });
+        app.directive('myDirectivesuper', function(){
+          return {
+            restrict: 'EA',
+            replace: true,
+            scope: {
+              myUrl: '@someAttr',
+              myLinkText: '@',
+            },
+            template: '<a href="{{ myUrl }}">{{ myLinkText }}</a>',
+          }
+        });
+        app.directive('newDirective', function(){
+          return {
+            restrict: 'A',
+            replace: true,
+            scope: {
+              myUrl: '=someAttr',
+              myLinkText: '@'
+            },
+            template: '\
+              <div>\
+                <label>My Url Field:</label>\
+                <input type="text" ng-model="myUrl" />\
+                <a href="{{myUrl}}">{{myLinkText}}</a>\
+              </div>\
+            '
+          }
+        });
+      </script>
+  </body>
+
+</html>

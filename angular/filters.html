@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="Tra">
+  <head>
+    <title>Simple app</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+    <style>
+      input.ng-invalid {
+        border: 1px solid red;
+      }
+      input.ng-valid {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+      <div ng-controller="MyController">
+        <h1>{{ sentence | capitalize }}</h1>
+      </div>
+
+      <form name="form" novalidate>
+        <label name="email">Your email</label>
+        <input type="email" name="email" ng-model="user.email" placeholder="Email Address"/>
+        <input type="text" required />
+        <input type="text" ng-minlength=5 />
+        <input type="text" ng-maxlength=5 />
+        <input type="text" ng-pattern="[a-zA-Z]" />
+        <input type="number" name="age" ng-model="user.age" />
+        <input type="url" name="homepage" ng-model="user.facebook_url" />
+      </form>
+      <script>
+        var app = angular.module('Tra', [])
+        app.filter('capitalize', function(){
+            return function(input){
+              return "drakonaS";
+            }
+        });
+        app.controller('MyController', function($scope){
+            $scope.sentence = "peliu edikas suvalge visus gyvulius.";
+        });
+
+
+      </script>
+  </body>
+</html>
