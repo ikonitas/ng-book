@@ -3,7 +3,8 @@ from rest_framework import routers
 from api import views
 
 router = routers.DefaultRouter()
-router.register(r'angular', views.AngularView, base_name="ng-book")
+router.register(r'angular', views.AngularViewHits, base_name="ng-book")
+
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
@@ -19,6 +20,6 @@ urlpatterns = patterns(
         include('rest_framework.urls', namespace='rest_framework')
     ),
     url(
-        r'^angular/', views.drakonas
+        r'^angular/', include('api.urls'),
     )
 )

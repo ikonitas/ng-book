@@ -4,7 +4,7 @@ angular.module('myApp.services', [])
   var service={
     count:function() {
       var d = $q.defer();
-      $http.get('http://192.168.1.29:8001/angular/')
+      $http.get('http://192.168.1.29:8001/angular/hits/')
       .success(function(data, status) {
         d.resolve(data.hits);
       }).error(function(data, status) {
@@ -14,7 +14,7 @@ angular.module('myApp.services', [])
     },
     registerHit: function() {
       var d=$q.defer();
-      $http.post('http://192.168.1.29:8001/angular/', {})
+      $http.post('http://192.168.1.29:8001/angular/hit/', {})
       .success(function(data, status) {
         d.resolve(data.hits);
       }).error(function(data, status) {

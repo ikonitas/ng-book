@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import viewsets, views
+from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
+from rest_framework import status
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,24 +21,25 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-class AngularView(views.APIView):
+
+class AngularViewHits(APIView):
+
+    hits = 0
+    #authentication_classes = (authentication.TokenAuthentication,)
+    #permission_classes = None#(permissions.IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
-        return self.retrieve(request, *args, **kwargs)
+        return Response({'hits': self.hits}, status=status.HTTP_201_CREATED)
 
+
+class AngularViewHit(APIView):
+    hits = 0
 
     def post(self, request, format=None):
-        import ipdb; ipdb.set_trace()
+        AngularViewHit.hits += 1
         #serializer = SnippetSerializer(data=request.DATA)
         #if serializer.is_valid():
         #    serializer.save()
-        #    return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({'hits': self.hits}, status=status.HTTP_201_CREATED)
         #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-from django.http import HttpResponse
-
-
-def drakonas(request):
-    return HttpResponse("boom")
