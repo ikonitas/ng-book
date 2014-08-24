@@ -8,9 +8,23 @@
   <body>
     <div ng-view>
     </div>
+
+      <h2>Signin to ngroad</h2>
+      <div google-signin
+        client-id='932502120053-ae49bdrpm8rmjofueh6l1rdg0mjis2k6.apps.googleusercontent.com'
+        after-signin="signedIn(oauth)"></div>
+      <pre>{{ user | json }}</pre>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers.js"></script>
     <script src="scripts/services.js"></script>
     <script src="scripts/directives.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client:plusone.js?onload=onLoadCallback';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+    </script>
   </body>
 </html>
